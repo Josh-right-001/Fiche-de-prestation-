@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kobocollect App | Designed by Joshright</title>
+
+    <!-- Importation des icônes Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <!-- Favicon -->
+    <link rel="icon" href="https://example.com/favicon.png" type="image/png">
+
+    <style>
+        /* Préload animation */
+        #preloader {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background-color: #f3f3f3;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            z-index: 9999;
+        }
+
+        .loader {
+            border: 16px solid #f3f3f3;
+            border-top: 16px solid #3498db;
+            border-radius: 50%;
+            width: 120px;
+            height: 120px;
+            animation: spin 2s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        #preloader-text {
+            margin-top: 20px;
+            font-size: 1.2em;
+            color: #333;
+        }
+
+        /* Styles pour l'interface utilisateur */
+        .interface-container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        label {
+            margin-bottom: 10px;
+        }
+
+        input[type="url"],
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button[type="button"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #4290D4;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        button[type="button"]:hover {
+            background-color: #3E558E;
+        }
+
+        /* Icône Font Awesome sur le bouton */
+        button i {
+            margin-right: 10px;
+        }
+
+        /* Style du popup */
+        #popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            display: none;
+        }
+
+        /* Barre de progression */
+        #progress-bar {
+            width: 100%;
+            background-color: #F3F3F3;
+            margin-top: 10px;
+        }
+
+        #progress-bar-fill {
+            height: 20px;
+            width: 0%;
+            background-color: #4CAF50;
+            transition: width 0.3s;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 40px;
+            text-align: center;
+        }
+
+        footer a {
+            text-decoration: none;
+            color: #3498db;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+
+.content {
+  max-width: 800px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Title (H1) styling */
+h1 {
+  font-size: 2.5rem;
+  color: #3498db;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Paragraph styling */
+p {
+  font-size: 1.1rem;
+  margin-bottom: 20px;
+  text-align: justify;
+}
+
+/* Strong tag for emphasis */
+strong {
+  color: #2c3e50;
+}
+    </style>
+</head>
+<body>
+
+<!-- Préchargement -->
+<div id="preloader">
+    <div class="loader"></div>
+    <p id="preloader-text">Chargement en cours...</p>
+</div>
+
+<!-- Interface utilisateur -->
+<div class="interface-container" id="interface-container" style="display: none;">
+  <div class="content">
+    <h1>Bienvenue sur notre Automate Web pour Kobocollect</h1>
+    <p>
+      Notre application web a été conçue pour vous simplifier la tâche en automatisant la soumission de réponses anonymes sur des sondages Kobocollect. Cet outil vous permet de maximiser le nombre de participants en gérant les soumissions de manière automatique et aléatoire.
+    </p>
+    <p>
+      Après un chargement fluide avec une animation professionnelle, vous accéderez à une interface intuitive qui vous permet d'entrer l'URL du sondage et de définir la fréquence des réponses, jusqu'à 500 réponses par minute. Il vous suffit ensuite de lancer l'opération, et l'application s'occupera du reste.
+    </p>
+    <p>
+      Créée par <strong>Josh Right</strong>, développeur web au sein de la <strong>Google Developer Student Community core team UCB</strong>, cette application est pensée pour rendre vos opérations de collecte de données plus rapides et efficaces.
+    </p>
+  </div>
+    <form>
+        <label for="survey-url">URL du sondage Kobocollect :</label>
+        <input type="url" id="survey-url" required>
+
+        <label for="responses-per-minute">Réponses par minute :</label>
+        <select id="responses-per-minute">
+<option value="5">5</option>
+<option value="10">10</option>
+<option value="20">20</option>
+<option value="30">30</option>
+<option value="40">40</option>
+<option value="50">50</option>
+<option value="60">60</option>
+<option value="70">70</option>
+<option value="80">80</option>
+<option value="90">90</option>
+<option value="100">100</option>
+<option value="110">110</option>
+<option value="120">120</option>
+<option value="130">130</option>
+<option value="140">140</option>
+<option value="150">150</option>
+<option value="160">160</option>
+<option value="170">170</option>
+<option value="180">180</option>
+<option value="190">190</option>
+<option value="200">200</option>
+<option value="210">210</option>
+<option value="220">220</option>
+<option value="230">230</option>
+<option value="240">240</option>
+<option value="250">250</option>
+<option value="260">260</option>
+<option value="270">270</option>
+<option value="280">280</option>
+<option value="290">290</option>
+<option value="300">300</option>
+<option value="310">310</option>
+<option value="320">320</option>
+<option value="330">330</option>
+<option value="340">340</option>
+<option value="350">350</option>
+<option value="360">360</option>
+<option value="370">370</option>
+<option value="380">380</option>
+<option value="390">390</option>
+<option value="400">400</option>
+<option value="410">410</option>
+<option value="420">420</option>
+<option value="430">430</option>
+<option value="440">440</option>
+<option value="450">450</option>
+<option value="460">460</option>
+<option value="470">470</option>
+<option value="480">480</option>
+<option value="490">490</option>
+<option value="500">500</option>
+
+        </select>
+
+        <button type="button" id="launch-button">
+            <i class="fas fa-paper-plane"></i> Lancer l'opération
+        </button>
+    </form>
+</div>
+
+<!-- Popup stylé -->
+<div id="popup">
+    <h3>Traitement en cours...</h3>
+    <p>Veuillez patienter, nous soumettons vos réponses.</p>
+    <div id="progress-bar">
+        <div id="progress-bar-fill"></div>
+    </div>
+</div>
+
+<footer>
+    Designed by <a href="https://api.whatsapp.com/send?phone=243974156933&text=Hello,%20Joshright" target="_blank">Joshright</a>
+</footer>
+
+<script>
+    // Préchargement : cacher le loader après 3 secondes
+    window.addEventListener('load', function() {
+        document.getElementById('preloader').style.display = 'none';
+        document.getElementById('interface-container').style.display = 'block';
+    });
+
+    // Gestion du bouton lancer
+    const launchButton = document.getElementById('launch-button');
+    const popup = document.getElementById('popup');
+    const progressBarFill = document.getElementById('progress-bar-fill');
+
+    launchButton.addEventListener('click', () => {
+        popup.style.display = 'block'; // Afficher le popup
+
+        let progress = 0;
+        const interval = setInterval(() => {
+            progress += 10;
+            progressBarFill.style.width = progress + '%';
+
+            if (progress >= 100) {
+                clearInterval(interval);
+                popup.style.display = 'none'; // Masquer le popup
+                alert('Opération terminée !'); // Message de fin
+            }
+        }, 300);
+    });
+</script>
+
+</body>
+</html>
